@@ -63,11 +63,37 @@ developing your own process.
 - Add a new toy when the toy form is submitted
 
   - How I debugged:
+  - I first checked whether the method is really broken by adding a new toy.
+  - I checked the console for any errors that might be logged. The console displayed several errors pertaining the ToyContainer and the ToyCard, but this was not enough. So I checked the network tab which documented an internal server error with a status: 500. Also, the preview details the error very well, i.e. 
+  <!-- - <NameError: uninitialized constant ToysController::Toys>" -->
+  -I think this is enough guidance to decipher what I will do at this point. i.e., initialize a ToysController to handle the logic pertaining the toys.
+  -On checking the controllers folder. There's already a controller to handle that, so I think I'll look more closely to see if I'm missing something.
+  -I can now post my toys after adding ! on the createbut I still get an error: 500. Not sure where this is coming from but I can bet it's still from the toys controller.
+  -Next, I put a byebug on the create method and confirmed that our params hash has the right values.
+  -I try to implement a rescue for whatever errors I might not be getting. I change the wrap_parameters value to false and do a ActiveRecord rescue. I still get the same error tho.
+  -I think at this point I'll move on to the next problem since this one is partially solved.
+
 
 - Update the number of likes for a toy
 
   - How I debugged:
+  - When I click on the like button on a particular toy, I get <!-- - "#<NoMethodError: undefined method `update' for nil:NilClass>" --
+  - At this point, I decide to test the API using postman. I realize that I cannot view one toy. I think I should add the show method in the resources.
+
+.........../ I take a break ......../
+
+  - I implement rescue_from  ActiveRecord::RecordInvalid, with: :render_unprocessable_entity
+  - -I also restore the wrap parameters array
+  - -I test the API using Postman
+  - -Same error from before
+  - I write the show method, Now I can find each toy by its id
+  - Test out other methods and they seem to be working fine exept the create method
+  - Realize I've a typo in my code. Change Toys.create to toy.create
+  - I can now create a toy
+  - Build the increment likes functionality
+  - Everything working fine now
 
 - Donate a toy to Goodwill (and delete it from our database)
 
   - How I debugged:
+  - I had built out this method previously.
