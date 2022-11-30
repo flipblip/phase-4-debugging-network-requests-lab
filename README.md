@@ -88,7 +88,7 @@ developing your own process.
   - -Same error from before
   - I write the show method, Now I can find each toy by its id
   - Test out other methods and they seem to be working fine exept the create method
-  - Realize I've a typo in my code. Change Toys.create to toy.create
+  - Realize I've a typo in my code. Change Toys.create to Toy.create
   - I can now create a toy
   - Build the increment likes functionality
   - Everything working fine now
